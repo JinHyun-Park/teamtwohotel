@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PolicyHandler{
+	@Autowired
+	private OrderRepository orderRepository;
+	
     @StreamListener(KafkaProcessor.INPUT)
     public void onStringEventListener(@Payload String eventString){
 
@@ -26,7 +29,11 @@ public class PolicyHandler{
     public void wheneverReserveCanceled_(@Payload ReserveCanceled reserveCanceled){
 
         if(reserveCanceled.isMe()){
-            System.out.println("##### listener  : " + reserveCanceled.toJson());
+//            System.out.println("##### listener  : " + reserveCanceled.toJson());
+        	Order order = new Order();
+        	order.setId(reserveCanceled.getId());
+        	order.setStatus("Reserve Cancelled");
+        	orderRepository.save(order);
         }
     }
 

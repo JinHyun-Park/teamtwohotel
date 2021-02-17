@@ -1,14 +1,14 @@
 package teamtwohotel;
 
-import teamtwohotel.config.kafka.KafkaProcessor;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.StreamListener;
+import org.springframework.data.repository.Repository;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
+import teamtwohotel.config.kafka.KafkaProcessor;
 
 @Service
 public class MypageViewHandler {
@@ -22,7 +22,7 @@ public class MypageViewHandler {
         try {
             if (ordered.isMe()) {
                 // view 객체 생성
-                  = new ();
+                  List<String, Object> list = new List<String, Object>();
                 // view 객체에 이벤트의 Value 를 set 함
                 .setOrderId(.getId());
                 .setName(.getName());

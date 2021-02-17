@@ -22,9 +22,9 @@ public class PaymentHistory {
         paymentApproved.publishAfterCommit();
 
 
-        PaymentCanceled paymentCanceled = new PaymentCanceled();
-        BeanUtils.copyProperties(this, paymentCanceled);
-        paymentCanceled.publishAfterCommit();
+//        PaymentCanceled paymentCanceled = new PaymentCanceled();
+//        BeanUtils.copyProperties(this, paymentCanceled);
+//        paymentCanceled.publishAfterCommit();
 
 
     }
