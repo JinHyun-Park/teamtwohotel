@@ -29,7 +29,7 @@ public class PolicyHandler{
     public void wheneverReserveCanceled_(@Payload ReserveCanceled reserveCanceled){
 
         if(reserveCanceled.isMe()){
-//            System.out.println("##### listener  : " + reserveCanceled.toJson());
+            System.out.println("##### listener  : " + reserveCanceled.toJson());
         	Order order = new Order();
         	order.setId(reserveCanceled.getId());
         	order.setStatus("Reserve Cancelled");

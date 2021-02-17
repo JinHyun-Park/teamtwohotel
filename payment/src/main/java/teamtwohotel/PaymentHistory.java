@@ -20,13 +20,13 @@ public class PaymentHistory {
         PaymentApproved paymentApproved = new PaymentApproved();
         BeanUtils.copyProperties(this, paymentApproved);
         paymentApproved.publishAfterCommit();
-
-
-//        PaymentCanceled paymentCanceled = new PaymentCanceled();
-//        BeanUtils.copyProperties(this, paymentCanceled);
-//        paymentCanceled.publishAfterCommit();
-
-
+    }
+    
+    @PostUpdate
+    public void onPostUpdate() {
+    	PaymentCanceled paymentCanceled = new PaymentCanceled();
+    	BeanUtils.copyProperties(this, paymentCanceled);
+    	paymentCanceled.publishAfterCommit();
     }
 
 
