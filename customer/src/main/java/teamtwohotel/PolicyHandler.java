@@ -19,7 +19,7 @@ public class PolicyHandler{
     public void wheneverReserveAccepted_(@Payload ReserveAccepted reserveAccepted){
 
         if(reserveAccepted.isMe()){
-            System.out.println("##### listener  : " + reserveAccepted.toJson());
+            System.out.println("##### Kako Send (Reservation Accepted  : " + reserveAccepted.toJson());
         }
     }
     @StreamListener(KafkaProcessor.INPUT)

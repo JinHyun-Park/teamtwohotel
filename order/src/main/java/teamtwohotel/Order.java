@@ -41,8 +41,8 @@ public class Order {
 
     }
 
-    @PreRemove
-    public void onPreRemove(){
+    @PostUpdate
+    public void onPostUpdate(){
     	System.out.println("Order PreRemove !!");
         OrderCanceled orderCanceled = new OrderCanceled();
         BeanUtils.copyProperties(this, orderCanceled);

@@ -23,6 +23,9 @@ public class PolicyHandler{
 
         if(reserveAccepted.isMe()){
             System.out.println("##### listener  : " + reserveAccepted.toJson());
+            Order order = new Order();
+            order.setStatus("Final Complete");
+            orderRepository.save(order);
         }
     }
     @StreamListener(KafkaProcessor.INPUT)

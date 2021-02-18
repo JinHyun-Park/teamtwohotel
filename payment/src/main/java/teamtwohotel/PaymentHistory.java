@@ -18,6 +18,7 @@ public class PaymentHistory {
     @PostPersist
     public void onPostPersist(){
         PaymentApproved paymentApproved = new PaymentApproved();
+        paymentApproved.setStatus("Pay Approved!!");
         BeanUtils.copyProperties(this, paymentApproved);
         paymentApproved.publishAfterCommit();
     }
