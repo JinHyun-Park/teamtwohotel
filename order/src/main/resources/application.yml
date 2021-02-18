@@ -66,3 +66,6 @@ spring:
         event-out:
           destination: teamtwohotel
           contentType: application/json
+api:
+  payment:
+    url: http://localhost:8083
