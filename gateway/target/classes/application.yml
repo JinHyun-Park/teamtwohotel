@@ -69,6 +69,10 @@ spring:
             allowedHeaders:
               - "*"
             allowCredentials: true
+            
+logging:
+  level:
+    root: debug
 
 server:
   port: 8080
