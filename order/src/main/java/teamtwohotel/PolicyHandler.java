@@ -1,12 +1,13 @@
 package teamtwohotel;
 
-import teamtwohotel.config.kafka.KafkaProcessor;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
+
+import teamtwohotel.config.kafka.KafkaProcessor;
 
 @Service
 public class PolicyHandler{
@@ -23,7 +24,12 @@ public class PolicyHandler{
 
         if(reserveAccepted.isMe()){
             System.out.println("##### listener  : " + reserveAccepted.toJson());
+//            Optional<Order> orderOptional = orderRepository.findById(reserveAccepted.getOrderId());
+//            Order order = orderOptional.get();
+//            order.setStatus(shipped.getStatus());
+            
             Order order = new Order();
+            order.setId(reserveAccepted.getOrderId());
             order.setStatus("Final Complete");
             orderRepository.save(order);
         }
