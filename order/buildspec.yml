@@ -4,6 +4,8 @@ env:
   variables:
     _PROJECT_NAME: "admin-order"
     _DIR_NAME: "order"
+    _EKS: "eks-admin"
+    _NAMESPACE: "teamtwohotel"
 
 phases:
   install:
@@ -44,7 +46,8 @@ phases:
           apiVersion: v1
           kind: Service
           metadata:
-            name: $_DIR_NAME
+            name: $_EKS
+            namespace: $_NAMESPACE
             labels:
               app: $_DIR_NAME
           spec:
@@ -60,6 +63,7 @@ phases:
           kind: Deployment
           metadata:
             name: $_DIR_NAME
+            namespace: $_NAMESPACE
             labels:
               app: $_DIR_NAME
           spec:
