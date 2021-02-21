@@ -60,7 +60,7 @@ phases:
 #            name: admin-eks
 #            namespace: kube-system
 #          EOF
-      - kubectl get all pods -n _NAMESPACE
+      - kubectl get all -n _NAMESPACE
       - kubectl apply -f deployment.yml
       - kubectl apply -f service.yml
 #      - |
