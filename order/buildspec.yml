@@ -17,7 +17,7 @@ phases:
       - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
       - chmod +x ./kubectl
       - mv ./kubectl /usr/local/bin/kubectl
-#      - aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --name $_EKS
+      - aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --name $_EKS
 #      - aws eks --region ap-northeast-2 update-kubeconfig --name $_EKS
   pre_build:
     commands:
@@ -41,11 +41,11 @@ phases:
 #      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$_PROJECT_NAME:$CODEBUILD_RESOLVED_SOURCE_VERSION
 #      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$_PROJECT_NAME:$IMAGE_TAG
       - echo connect kubectl
-      - kubectl config set-cluster k8s --server="$KUBE_URL" --insecure-skip-tls-verify=true
-      - kubectl config set-credentials admin --token="$KUBE_TOKEN"
-      - kubectl config set-context default --cluster=k8s --user=admin
-      - kubectl config use-context default
-      - pwd
+#      - kubectl config set-cluster k8s --server="$KUBE_URL" --insecure-skip-tls-verify=true
+#      - kubectl config set-credentials admin --token="$KUBE_TOKEN"
+#      - kubectl config set-context default --cluster=k8s --user=admin
+#      - kubectl config use-context default
+#      - pwd
       - kubectl apply -f deployment.yml
       - kubectl apply -f service.yml
 #      - |
