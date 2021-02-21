@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: order
+  namespace: teamtwohotel
   labels:
     app: order
 spec:
@@ -16,7 +17,7 @@ spec:
     spec:
       containers:
         - name: order
-          image: username/order:latest
+          image: 690521455231.dkr.ecr.ap-northeast-2.amazonaws.com/admin-order:latest
           ports:
             - containerPort: 8080
           readinessProbe:
