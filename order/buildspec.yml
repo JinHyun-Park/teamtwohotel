@@ -43,7 +43,7 @@ phases:
       - kubectl config set-credentials admin --token="$KUBE_TOKEN"
       - kubectl config set-context default --cluster=k8s --user=admin
       - kubectl config use-context default
-      - kubectl apply -f deploy.yml
+      - cd $_DIR_NAME && kubectl apply -f deploy.yml
       - kubectl apply -f service.yml
 #      - |
 #          cat <<EOF | kubectl apply -f -
