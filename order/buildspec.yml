@@ -45,7 +45,7 @@ phases:
       - kubectl config set-credentials admin --token="$KUBE_TOKEN"
       - kubectl config set-context default --cluster=k8s --user=admin
       - kubectl config use-context default
-      - kubectl get ns
+      - kubectl get all pods
       - kubectl apply -f deployment.yml
       - kubectl apply -f service.yml
 #      - |
