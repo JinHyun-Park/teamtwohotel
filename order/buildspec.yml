@@ -17,6 +17,7 @@ phases:
 #      - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
 #      - chmod +x ./kubectl
 #      - mv ./kubectl /usr/local/bin/kubectl
+      - aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --name admin-eks
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
@@ -26,7 +27,6 @@ phases:
       - echo $CODEBUILD_RESOLVED_SOURCE_VERSION
       - echo start command
       - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
-      - aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --name admin
   build:
     commands:
       - echo Build started on `date`
