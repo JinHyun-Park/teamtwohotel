@@ -5,7 +5,7 @@ env:
     _PROJECT_NAME: "admin-order"
     _DIR_NAME: "order"
 #    _EKS: "admin-eks"
-#    _NAMESPACE: "teamtwohotel"
+    _NAMESPACE: "teamtwohotel"
 
 phases:
   install:
@@ -32,7 +32,7 @@ phases:
       - echo Building the Docker image...
       - cd $_DIR_NAME && mvn package -Dmaven.test.skip=true
 #      - docker build -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$_PROJECT_NAME:$CODEBUILD_RESOLVED_SOURCE_VERSION  .
-      - docker build -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$_PROJECT_NAME:$IMAGE_TAG  .
+#      - docker build -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$_PROJECT_NAME:$IMAGE_TAG  .
   post_build:
     commands:
       - echo Pushing the Docker image...
@@ -44,32 +44,32 @@ phases:
       - kubectl config set-context default --cluster=k8s --user=admin
       - kubectl config use-context default
       - pwd
-      - kubectl apply -f deployment.yml
-      - kubectl apply -f service.yml
-#      - |
-#          cat <<EOF | kubectl apply -f -
-#          apiVersion: apps/v1
-#          kind: Deployment
-#          metadata:
-#            name: $_DIR_NAME
-#            namespace: $_NAMESPACE
-#            labels:
-#              app: $_DIR_NAME
-#          spec:
-#            replicas: 1
-#            selector:
-#              matchLabels:
-#                app: $_DIR_NAME
-#            template:
-#              metadata:
-#                labels:
-#                  app: $_DIR_NAME
-#              spec:
-#                containers:
-#                  - name: $_DIR_NAME
-#                    image: $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$_PROJECT_NAME:$CODEBUILD_RESOLVED_SOURCE_VERSION
-#                    ports:
-#                      - containerPort: 8080
+#      - kubectl apply -f deployment.yml
+#      - kubectl apply -f service.yml
+      - |
+          cat <<EOF | kubectl apply -f -
+          apiVersion: apps/v1
+          kind: Deployment
+          metadata:
+            name: $_DIR_NAME
+            namespace: $_NAMESPACE
+            labels:
+              app: $_DIR_NAME
+          spec:
+            replicas: 1
+            selector:
+              matchLabels:
+                app: $_DIR_NAME
+            template:
+              metadata:
+                labels:
+                  app: $_DIR_NAME
+              spec:
+                containers:
+                  - name: $_DIR_NAME
+                    image: $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$_PROJECT_NAME:$CODEBUILD_RESOLVED_SOURCE_VERSION
+                    ports:
+                      - containerPort: 8080
 #                    readinessProbe:
 #                      httpGet:
 #                        path: '/actuator/health'
@@ -86,7 +86,7 @@ phases:
 #                      timeoutSeconds: 2
 #                      periodSeconds: 5
 #                      failureThreshold: 5
-#          EOF
+          EOF
 #      - |
 #          cat <<EOF | kubectl apply -f -
 #          apiVersion: v1
