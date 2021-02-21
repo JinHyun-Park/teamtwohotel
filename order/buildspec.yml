@@ -45,22 +45,22 @@ phases:
       - kubectl config set-credentials admin --token="$KUBE_TOKEN"
       - kubectl config set-context default --cluster=k8s --user=admin
       - kubectl config use-context default
-      - |
-          cat <<EOF | kubectl apply -f -
-          apiVersion: rbac.authorization.k8s.io/v1beta1
-          kind: ClusterRoleBinding
-          metadata:
-            name: admin-eks
-          roleRef:
-            apiGroup: rbac.authorization.k8s.io
-            kind: ClusterRole
-            name: cluster-admin
-          subjects:
-          - kind: ServiceAccount
-            name: admin-eks
-            namespace: kube-system
-          EOF
-      - kubectl get all pods
+#      - |
+#          cat <<EOF | kubectl apply -f -
+#          apiVersion: rbac.authorization.k8s.io/v1beta1
+#          kind: ClusterRoleBinding
+#          metadata:
+#            name: admin-eks
+#          roleRef:
+#            apiGroup: rbac.authorization.k8s.io
+#            kind: ClusterRole
+#            name: cluster-admin
+#          subjects:
+#          - kind: ServiceAccount
+#            name: admin-eks
+#            namespace: kube-system
+#          EOF
+      - kubectl get all pods -n _NAMESPACE
       - kubectl apply -f deployment.yml
       - kubectl apply -f service.yml
 #      - |
