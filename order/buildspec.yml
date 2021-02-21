@@ -4,7 +4,7 @@ env:
   variables:
     _PROJECT_NAME: "admin-order"
     _DIR_NAME: "order"
-#    _EKS: "admin-eks"
+    _EKS: "admin-eks"
     _NAMESPACE: "teamtwohotel"
 
 phases:
