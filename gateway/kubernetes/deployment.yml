@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: customer
+  name: gateway
   namespace: teamtwohotel
   labels:
-    app: customer
+    app: gateway
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: customer
+      app: gateway
   template:
     metadata:
       labels:
-        app: customer
+        app: gateway
     spec:
       containers:
-        - name: customer
-          image: username/customer:latest
+        - name: gateway
+          image: username/gateway:latest
           ports:
             - containerPort: 8080
           readinessProbe:

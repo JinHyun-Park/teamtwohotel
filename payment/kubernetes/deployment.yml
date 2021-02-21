@@ -2,8 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: payment
+  namespace: teamtwohotel
   labels:
-    app: payment
+    app: order
 spec:
   replicas: 1
   selector:
@@ -16,7 +17,7 @@ spec:
     spec:
       containers:
         - name: payment
-          image: username/payment:latest
+          image: 690521455231.dkr.ecr.ap-northeast-2.amazonaws.com/admin-payment:latest
           ports:
             - containerPort: 8080
           readinessProbe:

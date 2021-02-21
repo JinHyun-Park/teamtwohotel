@@ -2,7 +2,10 @@ version: 0.2
 
 env: 
   variables:
-    _PROJECT_NAME: "reservation"
+    _PROJECT_NAME: "admin-reservation"
+    _DIR_NAME: "reservation"
+    _EKS: "admin-eks"
+    _NAMESPACE: "teamtwohotel"
 
 phases:
   install:
@@ -10,10 +13,11 @@ phases:
       java: openjdk8
       docker: 18
     commands:
-      - echo install kubectl
-      - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-      - chmod +x ./kubectl
-      - mv ./kubectl /usr/local/bin/kubectl
+#      - echo install kubectl
+#      - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+#      - chmod +x ./kubectl
+#      - mv ./kubectl /usr/local/bin/kubectl
+#      - aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --name $_EKS
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
@@ -27,53 +31,56 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - mvn package -Dmaven.test.skip=true
-      - docker build -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$_PROJECT_NAME:$CODEBUILD_RESOLVED_SOURCE_VERSION  .
+      - cd $_DIR_NAME && mvn package -Dmaven.test.skip=true
+      - docker build -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$_PROJECT_NAME:$IMAGE_TAG  .
   post_build:
     commands:
       - echo Pushing the Docker image...
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$_PROJECT_NAME:$CODEBUILD_RESOLVED_SOURCE_VERSION
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$_PROJECT_NAME:$IMAGE_TAG
       - echo connect kubectl
       - kubectl config set-cluster k8s --server="$KUBE_URL" --insecure-skip-tls-verify=true
       - kubectl config set-credentials admin --token="$KUBE_TOKEN"
       - kubectl config set-context default --cluster=k8s --user=admin
       - kubectl config use-context default
+      - kubectl get all -n _NAMESPACE
       - |
           cat <<EOF | kubectl apply -f -
           apiVersion: v1
           kind: Service
           metadata:
-            name: $_PROJECT_NAME
+            name: $_DIR_NAME
+            namespace: $_NAMESPACE
             labels:
-              app: $_PROJECT_NAME
+              app: $_DIR_NAME
           spec:
             ports:
               - port: 8080
                 targetPort: 8080
             selector:
-              app: $_PROJECT_NAME
+              app: $_DIR_NAME
           EOF
       - |
           cat  <<EOF | kubectl apply -f -
           apiVersion: apps/v1
           kind: Deployment
           metadata:
-            name: $_PROJECT_NAME
+            name: $_DIR_NAME
+            namespace: $_NAMESPACE
             labels:
-              app: $_PROJECT_NAME
+              app: $_DIR_NAME
           spec:
             replicas: 1
             selector:
               matchLabels:
-                app: $_PROJECT_NAME
+                app: $_DIR_NAME
             template:
               metadata:
                 labels:
-                  app: $_PROJECT_NAME
+                  app: $_DIR_NAME
               spec:
                 containers:
-                  - name: $_PROJECT_NAME
-                    image: $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$_PROJECT_NAME:$CODEBUILD_RESOLVED_SOURCE_VERSION
+                  - name: $_DIR_NAME
+                    image: $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$_PROJECT_NAME:$IMAGE_TAG
                     ports:
                       - containerPort: 8080
                     readinessProbe:
