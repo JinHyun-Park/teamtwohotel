@@ -39,7 +39,7 @@ phases:
     commands:
       - echo Pushing the Docker image...
 #      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$_PROJECT_NAME:$CODEBUILD_RESOLVED_SOURCE_VERSION
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$_PROJECT_NAME:$IMAGE_TAG
+#      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$_PROJECT_NAME:$IMAGE_TAG
       - echo connect kubectl
       - kubectl config set-cluster k8s --server="$KUBE_URL" --insecure-skip-tls-verify=true
       - kubectl config set-credentials admin --token="$KUBE_TOKEN"
