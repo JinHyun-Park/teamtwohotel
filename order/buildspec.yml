@@ -17,8 +17,8 @@ phases:
 #      - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
 #      - chmod +x ./kubectl
 #      - mv ./kubectl /usr/local/bin/kubectl
-      - echo eks --region $AWS_DEFAULT_REGION update-kubeconfig --name $_EKS
-      - aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --name $_EKS
+#      - echo eks --region $AWS_DEFAULT_REGION update-kubeconfig --name $_EKS
+#      - aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --name $_EKS
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
@@ -35,7 +35,7 @@ phases:
       - cd $_DIR_NAME && mvn package -Dmaven.test.skip=true
       - ls -al
       - pwd
-      - echo docker build -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$_PROJECT_NAME:$IMAGE_TAG .
+#      - echo docker build -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$_PROJECT_NAME:$IMAGE_TAG .
       - docker build -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$_PROJECT_NAME:$IMAGE_TAG .
   post_build:
     commands:
