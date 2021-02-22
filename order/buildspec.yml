@@ -2,7 +2,7 @@ version: 0.2
 
 env: 
   variables:
-    _PROJECT_NAME: "admin-order"
+    _PROJECT_NAME: "teamtwohotel-order"
     _DIR_NAME: "order"
     _EKS: "teamtwohotel"
     _NAMESPACE: "teamtwohotel"

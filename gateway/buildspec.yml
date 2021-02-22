@@ -2,7 +2,7 @@ version: 0.2
 
 env: 
   variables:
-    _PROJECT_NAME: "admin-gateway"
+    _PROJECT_NAME: "teamtwohotel-gateway"
     _DIR_NAME: "gateway"
     _EKS: "teamtwohotel"
     _NAMESPACE: "teamtwohotel"

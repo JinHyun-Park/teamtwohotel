@@ -2,7 +2,7 @@ version: 0.2
 
 env: 
   variables:
-    _PROJECT_NAME: "admin-payment"
+    _PROJECT_NAME: "teamtwohotel-payment"
     _DIR_NAME: "payment"
     _EKS: "teamtwohotel"
     _NAMESPACE: "teamtwohotel"
