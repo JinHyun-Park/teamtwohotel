@@ -18,6 +18,7 @@ spec:
       containers:
         - name: payment
           image: 496278789073.dkr.ecr.ap-northeast-2.amazonaws.com/teamtwohotel2-payment:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
           readinessProbe:
@@ -36,3 +37,8 @@ spec:
             timeoutSeconds: 2
             periodSeconds: 5
             failureThreshold: 5
+            resources:
+          limits:
+            cpu: 500m
+          requests:
+            cpu: 200m
