@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: payment
-          image: 690521455231.dkr.ecr.ap-northeast-2.amazonaws.com/admin-payment:latest
+          image: 496278789073.dkr.ecr.ap-northeast-2.amazonaws.com/teamtwohotel2-payment:latest
           ports:
             - containerPort: 8080
           readinessProbe:

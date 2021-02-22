@@ -2,9 +2,9 @@ version: 0.2
 
 env: 
   variables:
-    _PROJECT_NAME: "teamtwohotel-customer"
+    _PROJECT_NAME: "teamtwohotel2-customer"
     _DIR_NAME: "customer"
-    _EKS: "teamtwohotel"
+    _EKS: "teamtwohotel2"
     _NAMESPACE: "teamtwohotel"
 
 phases:
