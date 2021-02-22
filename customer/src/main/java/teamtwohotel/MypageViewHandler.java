@@ -44,6 +44,7 @@ public class MypageViewHandler {
                 List<Mypage> mypageList = mypageRepository.findByOrderId(paymentApproved.getOrderId());
                 for(Mypage mypage : mypageList){
                     // view 객체에 이벤트의 eventDirectValue 를 set 함
+                    mypage.setPaymentId(paymentApproved.getId());
                 	mypage.setStatus(paymentApproved.getStatus());
                     // view 레파지 토리에 save
                     mypageRepository.save(mypage);
@@ -62,6 +63,7 @@ public class MypageViewHandler {
                 for(Mypage mypage  : mypageList){
                     // view 객체에 이벤트의 eventDirectValue 를 set 함
                     // view 레파지 토리에 save
+                    mypage.setReservationId(reserveAccepted.getId());
                 	mypage.setStatus(reserveAccepted.getStatus());
                 	mypageRepository.save(mypage);
                 }
