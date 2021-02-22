@@ -31,7 +31,7 @@ public class PolicyHandler{
             Order order = new Order();
             order.setId(reserveAccepted.getOrderId());
             order.setStatus("Final Complete");
-            orderRepository.save(order);
+//          orderRepository.save(order);
         }
     }
     @StreamListener(KafkaProcessor.INPUT)
