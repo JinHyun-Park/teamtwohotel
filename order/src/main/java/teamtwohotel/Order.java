@@ -41,15 +41,15 @@ public class Order {
 
     }
 
-//    @PostUpdate
-//    public void onPostUpdate(){
-//    	System.out.println("Order PreRemove !!");
-//        OrderCanceled orderCanceled = new OrderCanceled();
-//        BeanUtils.copyProperties(this, orderCanceled);
-//        orderCanceled.publishAfterCommit();
-//
-//
-//    }
+    @PostUpdate
+    public void onPostUpdate(){
+    	System.out.println("Order PreRemove !!");
+        OrderCanceled orderCanceled = new OrderCanceled();
+        BeanUtils.copyProperties(this, orderCanceled);
+        orderCanceled.publishAfterCommit();
+
+
+    }
 
 
     public Long getId() {
