@@ -85,6 +85,11 @@ phases:
                     ports:
                       - containerPort: 8080
                     env:
+                      - name: PASSWD
+                        valueFrom:
+                          secretKeyRef:
+                            name: my-password
+                            key: password
                       - name: DATA1
                         valueFrom:
                           configMapKeyRef:
