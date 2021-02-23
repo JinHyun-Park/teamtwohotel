@@ -81,8 +81,15 @@ phases:
                 containers:
                   - name: $_DIR_NAME
                     image: $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$_PROJECT_NAME:$IMAGE_TAG
+                    imagePullPolicy: Always
                     ports:
                       - containerPort: 8080
+                    env:
+                      - name: DATA1
+                      valueFrom:
+                        configMapKeyRef:
+                          name: hotelcm
+                          key: text1
                     readinessProbe:
                       httpGet:
                         path: /actuator/health

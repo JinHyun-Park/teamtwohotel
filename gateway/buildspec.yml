@@ -82,6 +82,7 @@ phases:
                 containers:
                   - name: $_DIR_NAME
                     image: $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$_PROJECT_NAME:$IMAGE_TAG
+                    imagePullPolicy: Always
                     ports:
                       - containerPort: 8080
                     readinessProbe:
