@@ -20,6 +20,7 @@ public class PolicyHandler{
 
         if(reserveAccepted.isMe()){
             System.out.println("##### Kako Send (Reservation Accepted  : " + reserveAccepted.toJson());
+            System.out.println("Config Value : " + System.getenv("DATA1"));
         }
     }
     @StreamListener(KafkaProcessor.INPUT)
