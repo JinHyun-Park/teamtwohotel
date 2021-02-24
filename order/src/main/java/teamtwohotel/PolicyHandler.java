@@ -28,9 +28,9 @@ public class PolicyHandler{
 //            Order order = orderOptional.get();
 //            order.setStatus(shipped.getStatus());
             
-            Order order = new Order();
-            order.setId(reserveAccepted.getOrderId());
-            order.setStatus("Final Complete");
+//            Order order = new Order();
+//            order.setId(reserveAccepted.getOrderId());
+//            order.setStatus("Final Complete");
 //          orderRepository.save(order);
         }
     }
@@ -38,11 +38,11 @@ public class PolicyHandler{
     public void wheneverReserveCanceled_(@Payload ReserveCanceled reserveCanceled){
 
         if(reserveCanceled.isMe()){
-            System.out.println("##### listener  : " + reserveCanceled.toJson());
-        	Order order = new Order();
-        	order.setId(reserveCanceled.getId());
-        	order.setStatus("Reserve Cancelled");
-        	orderRepository.save(order);
+//            System.out.println("##### listener  : " + reserveCanceled.toJson());
+//        	Order order = new Order();
+//        	order.setId(reserveCanceled.getId());
+//        	order.setStatus("Reserve Cancelled");
+//        	orderRepository.save(order);
         }
     }
 
