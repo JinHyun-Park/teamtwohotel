@@ -43,7 +43,7 @@ public class Order {
 
     @PostUpdate
     public void onPostUpdate(){
-    	System.out.println("Order PreRemove !!");
+    	System.out.println("Order Cancel  !!");
         OrderCanceled orderCanceled = new OrderCanceled();
         BeanUtils.copyProperties(this, orderCanceled);
         orderCanceled.publishAfterCommit();

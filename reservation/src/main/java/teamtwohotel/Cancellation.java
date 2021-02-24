@@ -14,8 +14,8 @@ public class Cancellation {
     private Long orderId;
     private String status;
 
-    @PostPersist
-    public void onPostPersist(){
+    @PostUpdate
+    public void onPostUpdate(){
         ReserveCanceled reserveCanceled = new ReserveCanceled();
         BeanUtils.copyProperties(this, reserveCanceled);
         reserveCanceled.publishAfterCommit();
