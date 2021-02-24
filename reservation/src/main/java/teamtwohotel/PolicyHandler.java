@@ -38,12 +38,15 @@ public class PolicyHandler{
     public void wheneverOrderCanceled_(@Payload OrderCanceled orderCanceled){
 
         if(orderCanceled.isMe()){
-            System.out.println("##### listener  : " + orderCanceled.toJson());
-		
-	    Reservation reservation = reservationRepository.findByOrderId(orderCanceled.getId());
-            	    
-	    reservation.setStatus("Reservation Cancelled!");            
-	    reservationRepository.save(reservation);
+            System.out.println("##### reservation listener  : " + orderCanceled.toJson());
+            
+//            System.out.println("ID VALUE : " + orderCanceled.getId());
+//		    Cancellation cancellation = cancellationRepository.findByOrderId(orderCanceled.getId());
+		    Cancellation cancellation = new Cancellation();
+		    
+	        cancellation.setOrderId(orderCanceled.getId());    	    
+		    cancellation.setStatus("Reservation Cancelled!");            
+		    cancellationRepository.save(cancellation);
         }
     }
 
