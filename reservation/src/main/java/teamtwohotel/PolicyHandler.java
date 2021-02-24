@@ -39,9 +39,11 @@ public class PolicyHandler{
 
         if(orderCanceled.isMe()){
             System.out.println("##### listener  : " + orderCanceled.toJson());
-            Cancellation cancellation = new Cancellation();
-            cancellation.setStatus(orderCanceled.getStatus());
-            cancellation.setOrderId(orderCanceled.getId());
+		
+	    Reservation reservation = reservationRepository.findByOrderId(orderCanceled.getId());
+            	    
+	    reservation.setStatus("Reservation Cancelled!");            
+	    reservationRepository.save(reservation);
         }
     }
 
