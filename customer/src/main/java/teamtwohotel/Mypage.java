@@ -10,10 +10,8 @@ public class Mypage {
         @Id
         @GeneratedValue(strategy=GenerationType.AUTO)
         private Long id;
-        private Long orderId;
-        private Long paymentId;
-        private Long reservationId;
-        private Long cancellationId;
+        private Long orderId;        
+        private Long reservationId;        
         private String name;
         private Integer guest;
         private String status;
@@ -33,27 +31,13 @@ public class Mypage {
         public void setOrderId(Long orderId) {
             this.orderId = orderId;
         }
-        public Long getPaymentId() {
-            return paymentId;
-        }
-
-        public void setPaymentId(Long paymentId) {
-            this.paymentId = paymentId;
-        }
         public Long getReservationId() {
             return reservationId;
         }
 
         public void setReservationId(Long reservationId) {
             this.reservationId = reservationId;
-        }
-        public Long getCancellationId() {
-            return cancellationId;
-        }
-
-        public void setCancellationId(Long cancellationId) {
-            this.cancellationId = cancellationId;
-        }
+        }        
         public String getName() {
             return name;
         }
